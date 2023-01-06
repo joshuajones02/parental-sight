@@ -2,16 +2,17 @@ namespace ParentalSight.Email.Sample
 {
     using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Logging;
+    using ParentalSight;
     using System;
     using System.Threading;
     using System.Threading.Tasks;
 
-    public class Worker : BackgroundService
+    public class SampleSmtpEmailService : BackgroundService
     {
         private readonly IEmailClient _email;
-        private readonly ILogger<Worker> _logger;
+        private readonly ILogger<SampleSmtpEmailService> _logger;
 
-        public Worker(IEmailClient email, ILogger<Worker> logger)
+        public SampleSmtpEmailService(IEmailClient email, ILogger<SampleSmtpEmailService> logger)
         {
             _email = email;
             _logger = logger;
@@ -22,7 +23,11 @@ namespace ParentalSight.Email.Sample
             while (!stoppingToken.IsCancellationRequested)
             {
                 _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
-                await _email.SendAsync("joshuajones0222@gmail.com", "Test", $"Worker running at: {DateTimeOffset.Now}");
+
+                await _email.SendAsync(
+                          subject: "THIS IS A TEST",
+                             body: string.Concat("Worker running at: ", DateTimeOffset.Now),
+                    stoppingToken: stoppingToken);
 
                 await Task.Delay(5000, stoppingToken);
             }
