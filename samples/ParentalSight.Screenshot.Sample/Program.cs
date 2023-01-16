@@ -15,7 +15,7 @@ namespace ParentalSight.Screenshot.Sample
             Host.CreateDefaultBuilder(args)
                 .ConfigureServices((hostContext, services) =>
                 {
-                    services.AddScreenshotService();
+                    //services.AddScreenshotService();
                     services.AddHostedService<Worker>();
                 });
     }

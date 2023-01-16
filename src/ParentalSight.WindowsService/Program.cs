@@ -28,8 +28,19 @@ namespace ParentalSight.WindowsService
             Host.CreateDefaultBuilder(args)
                 .ConfigureHostConfiguration(builder => builder.BuildServiceConfiguration())
                 .ConfigureLogging((context, builder) => builder.ConfigureLogging(context))
+#if DEBUG
+                .ConfigureServices((context, services) =>
+                {
+                    var worker = Environment.GetEnvironmentVariable("");
+                    if (worker == "keylogger")
+                    {
+                        services.AddHostedService<KeyloggerWorker>();
+                    }
+                })
+#else
                 .ConfigureServices((context, services) => services.ConfigureServices(context))
                 .UseWindowsService(options => options.ServiceName = "ps-winsvc")
+#endif
                 .Build();
     }
 }

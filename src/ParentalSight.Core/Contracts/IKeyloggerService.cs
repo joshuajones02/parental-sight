@@ -1,9 +1,10 @@
 ﻿namespace ParentalSight
 {
+    using System.Threading;
     using System.Threading.Tasks;
 
     public interface IKeyloggerService
     {
-        Task StartAsync(long expirationInMilliseconds, string outputPath);
+        Task StartAsync(long expirationInMilliseconds, string outputPath, CancellationToken stoppingToken);
     }
 }

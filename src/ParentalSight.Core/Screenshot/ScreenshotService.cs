@@ -10,11 +10,15 @@
 
     public class FilenameBuilder
     {
-        private readonly DateTime _dateTime;
+        private readonly string _dateTime;
+
+        public FilenameBuilder() : this(DateTime.Now)
+        {
+        }
 
         public FilenameBuilder(DateTime dateTime)
         {
-            _dateTime = dateTime;
+            _dateTime = dateTime.ToString("yyyyMMdd-HHmm");
         }
 
         private string _prefix;
@@ -25,22 +29,26 @@
             return this;
         }
 
+        private string _fileExtension;
+        public FilenameBuilder WithExtension(string fileExtension)
+        {
+            _fileExtension = fileExtension.StartsWith('.') ?
+                fileExtension : string.Concat('.', fileExtension);
+
+            return this;
+        }
+
         public string Build() =>
-            $"{_prefix}{_dateTime}";
+            $"{_prefix}{_dateTime}{_fileExtension}";
     }
 
     internal class ScreenshotService : IScreenshotService
     {
-        protected string GenerateFilename()
-        {
-            var filename = DateTime.ToString("yyyyMMdd-HHmm");
-        }
-
         public async Task StartAsync(long captureDelayInMilliseconds, string outputPath, CancellationToken stoppingToken)
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-
+                var filename = new FilenameBuilder().WithPrefix("screenshot-").WithExtension("PNG").Build();
                 CaptureScreen(outputPath, filename);
                 await Task.Delay((int)captureDelayInMilliseconds);
             }

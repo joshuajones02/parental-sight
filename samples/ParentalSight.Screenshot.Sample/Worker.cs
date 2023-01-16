@@ -24,7 +24,7 @@ namespace ParentalSight.Screenshot.Sample
             {
                 _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
 
-                _screenshot.Capture(AppDomain.CurrentDomain.BaseDirectory, string.Empty);
+                //_screenshot.Capture(AppDomain.CurrentDomain.BaseDirectory, string.Empty);
 
                 await Task.Delay(1000, stoppingToken);
             }
