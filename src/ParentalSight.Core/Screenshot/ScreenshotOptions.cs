@@ -1,15 +1,19 @@
 ﻿namespace ParentalSight.Core.Screenshot
 {
-    internal class ScreenshotOptions : IScreenshotOptions
+    public class ScreenshotOptions : IScreenshotOptions
     {
-        public ScreenshotOptions(long captureDelayInMilliseconds, string outputPath)
+        public ScreenshotOptions()
+        {
+        }
+
+        public ScreenshotOptions(int captureDelayInMilliseconds, string outputPath)
         {
             CaptureDelayInMilliseconds = captureDelayInMilliseconds;
             OutputPath = outputPath;
         }
 
-        public long CaptureDelayInMilliseconds { get; protected set; }
+        public virtual int CaptureDelayInMilliseconds { get; set; }
 
-        public string OutputPath { get; protected set; }
+        public virtual string OutputPath { get; set; }
     }
 }

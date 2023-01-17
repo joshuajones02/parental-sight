@@ -3,7 +3,7 @@
     using System.Threading;
     using System.Threading.Tasks;
 
-    public interface IScreenshotService
+    public interface IWebcamService
     {
         Task StartAsync(CancellationToken stoppingToken);
     }

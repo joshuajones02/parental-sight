@@ -1,8 +1,23 @@
 ﻿{
   "profiles": {
-    "ParentalSight.WindowsService": {
+    "keylogger": {
       "commandName": "Project",
       "environmentVariables": {
+        "DEBUG_WORKER": "keylogger",
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    },
+    "screenshot": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DEBUG_WORKER": "screenshot",
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    },
+    "webcam": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DEBUG_WORKER": "webcam",
         "DOTNET_ENVIRONMENT": "Development"
       }
     }

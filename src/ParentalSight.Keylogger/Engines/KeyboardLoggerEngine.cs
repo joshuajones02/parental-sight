@@ -141,7 +141,6 @@
 
                     using (var ctl = new ConsoleTraceListener(false))
                     {
-
                         ctl.TraceOutputOptions = TraceOptions.DateTime;
 
                         Trace.Listeners.Add(twtl);
@@ -149,8 +148,8 @@
                         Trace.AutoFlush = true;
 
                         // Start the clipboard
-                        ThreadStart clipboardThreadStart = new ThreadStart(BootClipboard);
-                        Thread clipboardThread = new Thread(clipboardThreadStart);
+                        var clipboardThreadStart = new ThreadStart(BootClipboard);
+                        var clipboardThread = new Thread(clipboardThreadStart);
                         clipboardThread.Start();
 
                         //Application.Run(new ClipboardNotification.NotificationForm());

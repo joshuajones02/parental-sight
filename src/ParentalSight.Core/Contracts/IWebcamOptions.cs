@@ -1,6 +1,6 @@
 ﻿namespace ParentalSight.Core
 {
-    public interface IScreenshotOptions
+    public interface IWebcamOptions
     {
         int CaptureDelayInMilliseconds { get; }
         string OutputPath { get; }

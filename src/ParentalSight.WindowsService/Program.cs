@@ -1,7 +1,7 @@
 namespace ParentalSight.WindowsService
 {
-    using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+    using Serilog;
     using System;
     using System.Threading.Tasks;
 
@@ -11,7 +11,7 @@ namespace ParentalSight.WindowsService
         {
             try
             {
-                using (var host = CreateHostBuilder(args))
+                using (var host = HostBuilder(args).Build())
                 {
                     await host.RunAsync();
                 }
@@ -24,23 +24,23 @@ namespace ParentalSight.WindowsService
             }
         }
 
-        public static IHost CreateHostBuilder(string[] args) =>
+        public static IHostBuilder HostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureHostConfiguration(builder => builder.BuildServiceConfiguration())
+                .ConfigureAppConfiguration((context, builder) => builder.ConfigureConfiguration(context))
                 .ConfigureLogging((context, builder) => builder.ConfigureLogging(context))
 #if DEBUG
                 .ConfigureServices((context, services) =>
                 {
-                    var worker = Environment.GetEnvironmentVariable("");
-                    if (worker == "keylogger")
-                    {
-                        services.AddHostedService<KeyloggerWorker>();
-                    }
+                    services.ConfigureServices(context);
+                    var worker = Environment.GetEnvironmentVariable("DEBUG_WORKER");
+                    services.AddHostedService(context.Configuration, worker);
                 })
 #else
-                .ConfigureServices((context, services) => services.ConfigureServices(context))
-                .UseWindowsService(options => options.ServiceName = "ps-winsvc")
+                .ConfigureServices((context, services) =>
+                    services.ConfigureServices(context)
+                            .AddHostedServices(context.Configuration))
+                .UseWindowsService(options => options.ServiceName = "ps-winsvc");
 #endif
-                .Build();
+                .UseSerilog();
     }
 }

@@ -2,7 +2,7 @@
 {
     public interface IKeyloggerOptions
     {
-        long LogRotationInMilliseconds { get; }
+        int LogRotationInMilliseconds { get; }
         string OutputPath { get; }
     }
 }

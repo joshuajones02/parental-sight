@@ -6,14 +6,14 @@
 
     public static class KeyloggerBuilderExtensions
     {
-        public static IServiceCollection AddKeylogger(this IServiceCollection services, long logRotationInMilliseconds, string outputPath)
+        public static IServiceCollection AddKeylogger(this IServiceCollection services, IKeyloggerOptions options)
         {
-            if (logRotationInMilliseconds is default(long))
-                throw new ArgumentException(nameof(logRotationInMilliseconds));
-            if (string.IsNullOrEmpty(outputPath))
-                throw new ArgumentException(nameof(outputPath));
+            if (options.LogRotationInMilliseconds is default(int))
+                throw new ArgumentException(nameof(options.LogRotationInMilliseconds));
+            if (string.IsNullOrEmpty(options.OutputPath))
+                throw new ArgumentException(nameof(options.OutputPath));
 
-            services.AddSingleton<IKeyloggerOptions>(new KeyloggerOptions(logRotationInMilliseconds, outputPath));
+            services.AddSingleton<IKeyloggerOptions>(options);
             services.AddTransient<IKeyloggerService, KeyloggerService>();
 
             return services;

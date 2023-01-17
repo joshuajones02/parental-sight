@@ -5,6 +5,6 @@
 
     public interface IKeyloggerService
     {
-        Task StartAsync(long expirationInMilliseconds, string outputPath, CancellationToken stoppingToken);
+        Task StartAsync(CancellationToken stoppingToken);
     }
 }

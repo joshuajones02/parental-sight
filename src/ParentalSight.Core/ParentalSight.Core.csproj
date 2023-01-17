@@ -6,11 +6,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Emgu.CV" Version="4.6.0.5131" />
+    <PackageReference Include="Emgu.CV.runtime.windows" Version="4.6.0.5131" />
     <PackageReference Include="FluentEmail.Smtp" Version="3.0.2" />
     <PackageReference Include="System.Drawing.Primitives" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ParentalSight.Common\ParentalSight.Common.csproj" />
     <ProjectReference Include="..\ParentalSight.Keylogger\ParentalSight.Keylogger.csproj" />
   </ItemGroup>
 

@@ -1,25 +1,19 @@
 ﻿namespace ParentalSight.Core.Screenshot
 {
-    using Microsoft.Extensions.Logging;
     using ParentalSight.Common.Builders;
     using ParentalSight.Core.Contracts;
     using System;
-    using System.Drawing;
-    using System.Drawing.Imaging;
     using System.IO;
     using System.Threading;
     using System.Threading.Tasks;
-    using System.Windows.Forms;
 
-    internal class ScreenshotService : IScreenshotService
+    internal class WebcamService : IWebcamService
     {
-        private readonly ILogger<ScreenshotService> _logger;
-        private readonly IScreenshotClient _client;
-        private readonly IScreenshotOptions _options;
+        private readonly IWebcamClient _client;
+        private readonly IWebcamOptions _options;
 
-        public ScreenshotService(ILogger<ScreenshotService> logger, IScreenshotClient client, IScreenshotOptions options)
+        public WebcamService(IWebcamClient client, IWebcamOptions options)
         {
-            _logger = logger;
             _client = client;
             _options = options;
         }
@@ -35,9 +29,8 @@
 
             while (!stoppingToken.IsCancellationRequested)
             {
-                _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
-                var filename = new FilenameBuilder().WithPrefix("screenshot-").Build();
-                _client.CaptureScreen(output, filename);
+                var filename = new FilenameBuilder().WithPrefix("webcam-").Build();
+                _client.Capture(output, filename);
                 await Task.Delay(_options.CaptureDelayInMilliseconds);
             }
         }
