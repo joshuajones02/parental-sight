@@ -1,15 +1,9 @@
 ﻿namespace ParentalSight.GarbageCollection
 {
+    using ParentalSight;
     using System;
     using System.IO;
     using System.Linq;
-
-    public interface IGarbageCollector
-    {
-        void DeleteFiles(string directory, DateTime? minCreationTime = null);
-
-        void Archive(string directory, string outputDirectory);
-    }
 
     public class GarbageCollector : IGarbageCollector
     {

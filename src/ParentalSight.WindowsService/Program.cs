@@ -1,23 +1,46 @@
 namespace ParentalSight.WindowsService
 {
-    using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+    using Serilog;
+    using System;
     using System.Threading.Tasks;
 
     public class Program
     {
         public static async Task Main(string[] args)
         {
-            using (var host = CreateHostBuilder(args))
+            try
             {
-                await host.RunAsync();
+                using (var host = HostBuilder(args).Build())
+                {
+                    await host.RunAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                if (ex.InnerException != null)
+                    throw ex.InnerException;
+                throw;
             }
         }
 
-        public static IHost CreateHostBuilder(string[] args) =>
+        public static IHostBuilder HostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .UseWindowsService(options => options.ServiceName = "ps-winsvc")
-                .ConfigureServices((_, services) => services.AddHostedService<Worker>())
-                .Build();
+                .ConfigureAppConfiguration((context, builder) => builder.ConfigureConfiguration(context))
+                .ConfigureLogging((context, builder) => builder.ConfigureLogging(context))
+#if DEBUG
+                .ConfigureServices((context, services) =>
+                {
+                    services.ConfigureServices(context);
+                    var worker = Environment.GetEnvironmentVariable("DEBUG_WORKER");
+                    services.AddHostedService(context.Configuration, worker);
+                })
+#else
+                .ConfigureServices((context, services) =>
+                    services.ConfigureServices(context)
+                            .AddHostedServices(context.Configuration))
+                .UseWindowsService(options => options.ServiceName = "ps-winsvc");
+#endif
+                .UseSerilog();
     }
 }

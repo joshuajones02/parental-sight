@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\ParentalSight.Keylogger\ParentalSight.Keylogger.csproj" />
+    <ProjectReference Include="..\..\src\ParentalSight.Core\ParentalSight.Core.csproj" />
   </ItemGroup>
 
 </Project>

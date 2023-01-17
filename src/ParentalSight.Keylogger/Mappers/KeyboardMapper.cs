@@ -248,89 +248,95 @@
                     case Keys.F12:
                         return "<F12>";
 
-                    //case Keys.Snapshot:
-                    //    return "<Print Screen>";
-                    //
-                    //case Keys.Scroll:
-                    //    return "<Scroll Lock>";
-                    //
-                    //case Keys.Pause:
-                    //    return "<Pause/Break>";
-                    //
-                    case Keys.Insert:
-                        return "<Insert>";
-
-                    //case Keys.Home:
-                    //    return "<Home>";
-                    //
-                    case Keys.Delete:
-                        return "<Delete>";
-
-                    //case Keys.End:
-                    //    return "<End>";
-                    //
-                    //case Keys.Prior:
-                    //    return "<Page Up>";
-                    //
-                    //case Keys.Next:
-                    //    return "<Page Down>";
-                    //
-                    //case Keys.Escape:
-                    //    return "<Esc>";
-                    //
-                    //case Keys.NumLock:
-                    //    return "<Num Lock>";
-                    //
-                    //case Keys.Capital:
-                    //    return "<Caps Lock>";
-                    //
                     case Keys.Tab:
-                        return "<Tab>";
-
-                    case Keys.Back:
-                        return "<Backspace>";
+                        return "\t";
 
                     case Keys.Enter:
-                        return "<Enter>";
+                        return "\n";
 
                     case Keys.Space:
-                        return "<Space Bar>";
+                        return " ";
 
-                    case Keys.Left:
-                        return "<Left>";
+                        #region Keys removed 1/14/2023
+                        /*
+                        case Keys.Back:
+                            return "<Backspace>";
 
-                    case Keys.Up:
-                        return "<Up>";
+                        case Keys.Left:
+                            return "<Left>";
 
-                    case Keys.Right:
-                        return "<Right>";
+                        case Keys.Up:
+                            return "<Up>";
 
-                    case Keys.Down:
-                        return "<Down>";
+                        case Keys.Right:
+                            return "<Right>";
 
-                    case Keys.LMenu:
-                        return "<Alt>";
+                        case Keys.Down:
+                            return "<Down>";
 
-                    case Keys.RMenu:
-                        return "<Alt>";
+                        case Keys.LMenu:
+                            return "<Alt>";
 
-                    case Keys.LWin:
-                        return "<Windows Key>";
+                        case Keys.RMenu:
+                            return "<Alt>";
 
-                    case Keys.RWin:
-                        return "<Windows Key>";
+                        case Keys.LWin:
+                            return "<WIN>";
 
-                    //case Keys.LShiftKey:
-                    //    return "<Shift>";
-                    //
-                    //case Keys.RShiftKey:
-                    //    return "<Shift>";
-                    //
-                    case Keys.LControlKey:
-                        return "<Ctrl>";
+                        case Keys.RWin:
+                            return "<WIN>";
 
-                    case Keys.RControlKey:
-                        return "<Ctrl>";
+                        //case Keys.LShiftKey:
+                        //    return "<Shift>";
+                        //
+                        //case Keys.RShiftKey:
+                        //    return "<Shift>";
+                        
+                        case Keys.LControlKey:
+                            return "<Ctrl>";
+
+                        case Keys.RControlKey:
+                            return "<Ctrl>";
+
+                        //case Keys.Snapshot:
+                        //    return "<Print Screen>";
+                        //
+                        //case Keys.Scroll:
+                        //    return "<Scroll Lock>";
+                        //
+                        //case Keys.Pause:
+                        //    return "<Pause/Break>";
+
+                        case Keys.Insert:
+                            return "<Insert>";
+
+                        //case Keys.Home:
+                        //    return "<Home>";
+
+                        case Keys.Delete:
+                            return "<Delete>";
+
+                         //case Keys.End:
+                         //    return "<End>";
+                         //
+                         //case Keys.Prior:
+                         //    return "<Page Up>";
+                         //
+                         //case Keys.Next:
+                         //    return "<Page Down>";
+                         //
+                         //case Keys.Escape:
+                         //    return "<Esc>";
+                         //
+                         //case Keys.NumLock:
+                         //    return "<Num Lock>";
+                         //
+                         //case Keys.Capital:
+                         //    return "<Caps Lock>";
+                         //
+                         */
+
+                        #endregion Keys removed 1/14/2023
                 }
             }
 
