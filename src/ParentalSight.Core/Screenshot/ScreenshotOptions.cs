@@ -8,7 +8,7 @@
 
         public ScreenshotOptions(int captureDelayInMilliseconds, string outputPath)
         {
-            CaptureDelayInMilliseconds = captureDelayInMilliseconds;
+            CaptureDelayInMilliseconds = 10_000; // captureDelayInMilliseconds;
             OutputPath = outputPath;
         }
 

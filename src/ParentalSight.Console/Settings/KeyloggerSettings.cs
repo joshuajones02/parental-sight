@@ -11,7 +11,8 @@
         {
             LogRotationInMilliseconds = config.GetValue<int>("service:keylogger:logRotationInMilliseconds");
             OutputPath = config.GetValue<string>("service:defaultOutputPath")?
-                               .Replace("{user}", Environment.UserName);
+                               .Replace("{user}", Environment.UserName)
+                               .TrimEnd('$'); ;
         }
 
         public int LogRotationInMilliseconds { get; set; }

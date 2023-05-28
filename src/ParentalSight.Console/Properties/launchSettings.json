@@ -1,23 +1,29 @@
 ﻿{
   "profiles": {
-    "keylogger": {
+    "all": {
       "commandName": "Project",
       "environmentVariables": {
-        "DEBUG_WORKER": "keylogger",
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    },
+    "keylogger": {
+      "commandLineArgs": "keylogger",
+      "commandName": "Project",
+      "environmentVariables": {
         "DOTNET_ENVIRONMENT": "Development"
       }
     },
     "screenshot": {
+      "commandLineArgs": "screenshot",
       "commandName": "Project",
       "environmentVariables": {
-        "DEBUG_WORKER": "screenshot",
         "DOTNET_ENVIRONMENT": "Development"
       }
     },
     "webcam": {
+      "commandLineArgs": "webcam",
       "commandName": "Project",
       "environmentVariables": {
-        "DEBUG_WORKER": "webcam",
         "DOTNET_ENVIRONMENT": "Development"
       }
     }

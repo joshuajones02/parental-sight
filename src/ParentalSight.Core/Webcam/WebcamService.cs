@@ -26,19 +26,18 @@
             try
             {
                 // TODO: Move to central point which also includes ther logged in users name
-                var output = Path.Combine(_options.OutputPath, Environment.UserName);
-                if (!Directory.Exists(output))
+                if (!Directory.Exists(_options.OutputPath))
                 {
-                    Directory.CreateDirectory(output);
+                    Directory.CreateDirectory(_options.OutputPath);
                 }
 
                 while (!stoppingToken.IsCancellationRequested)
                 {
-                    _logger.LogInformation("WebcamService : Output path: {path}", output);
+                    _logger.LogInformation("WebcamService : Output path: {path}", _options.OutputPath);
                     _logger.LogInformation("WebcamService : Worker running at: {time}", DateTimeOffset.Now);
                     var filename = new FilenameBuilder().WithPrefix("webcam-").Build();
                     _logger.LogInformation("WebcamService : Filename: {filename}", filename);
-                    _client.Capture(output, filename);
+                    _client.Capture(_options.OutputPath, filename);
                     await Task.Delay(_options.CaptureDelayInMilliseconds);
                 }
             }

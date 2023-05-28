@@ -12,7 +12,9 @@
         {
             CreateDisguiseFolders = config.GetValue<bool>("service:createDisguiseFolders");
             OutputPath = config.GetValue<string>("service:defaultOutputPath")?
-                               .Replace("{user}", Environment.UserName);
+                               .Replace("{user}", Environment.UserName)
+                               .TrimEnd('$');
+            HostedServices = config.GetValue<List<string>>("service:hostedServices");
 
             if (CreateDisguiseFolders)
             {
@@ -36,5 +38,7 @@
         public bool CreateDisguiseFolders { get; }
 
         public string OutputPath { get; }
+
+        public List<string> HostedServices { get; }
     }
 }

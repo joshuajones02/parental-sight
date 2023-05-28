@@ -7,6 +7,7 @@
     using ParentalSight.WindowsService.WorkerServices;
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     internal static class WorkerRegistrar
     {
@@ -27,24 +28,10 @@
                 }
             };
 
-        public static IServiceCollection AddHostedService(this IServiceCollection services, IConfiguration config, string worker)
+        public static IServiceCollection AddHostedServices(this IServiceCollection services, IConfiguration config, string[] args)
         {
-            if (string.IsNullOrEmpty(worker))
-                throw new ArgumentNullException(nameof(worker));
-            if (!_hostedServiceRegistrations.ContainsKey(worker))
-                throw new NotImplementedException(worker);
-
-            _hostedServiceRegistrations[worker](services, config);
-
-            return services;
-        }
-
-        public static IServiceCollection AddHostedServices(this IServiceCollection services, IConfiguration config)
-        {
-            foreach (var registration in _hostedServiceRegistrations)
-            {
-                registration.Value(services, config);
-            }
+            foreach (var service in args ?? _hostedServiceRegistrations.Select(x => x.Key))
+                _hostedServiceRegistrations[service](services, config);
 
             return services;
         }

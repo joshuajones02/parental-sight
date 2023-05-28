@@ -5,12 +5,8 @@
     using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Logging;
     using ParentalSight.Core;
-    using ParentalSight.Core.Keylogger;
     using ParentalSight.WindowsService.Settings;
-    using ParentalSight.WindowsService.WorkerServices;
     using Serilog;
-    using System;
-    using System.Collections.Generic;
     using System.IO;
     using System.Linq;
 
@@ -51,9 +47,10 @@
             builder.AddConfiguration(loggingSettings);
         }
 
-        public static IServiceCollection ConfigureServices(this IServiceCollection services, HostBuilderContext context)
+        public static IServiceCollection ConfigureServices(this IServiceCollection services, HostBuilderContext context, string[] args)
         {
             var config = context.Configuration;
+            services.AddHostedServices(config, args);
             // TODO: Move or implement somewhere better
             services.AddSmtpEmailService(
                    port: config.GetRequiredValue<int>("email:smtp:port"),

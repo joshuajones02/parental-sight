@@ -1,23 +1,21 @@
 namespace ParentalSight.WindowsService
 {
-    using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
-    using ParentalSight.WindowsService.WorkerServices;
     using Serilog;
     using System;
-    using System.Threading.Tasks;
 
     public class Program
     {
-        public static async Task Main(string[] args)
+        public static void Main(string[] args)
         {
             var _logger = Log.Logger;
+
             try
             {
-                _logger.Information("Starting Windows Service {time}", DateTime.Now);
+                _logger.Information("Starting Hosted Service {time}", DateTime.Now);
                 using (var host = HostBuilder(args).Build())
                 {
-                    await host.RunAsync();
+                    host.Run();
                 }
             }
             catch (Exception ex)
@@ -34,7 +32,7 @@ namespace ParentalSight.WindowsService
             }
             finally
             {
-                _logger.Information("Stopping Windows Service {time}", DateTime.Now);
+                _logger.Information("Stopping Hosted Service {time}", DateTime.Now);
             }
         }
 
@@ -42,19 +40,7 @@ namespace ParentalSight.WindowsService
             Host.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration((context, builder) => builder.ConfigureConfiguration(context))
                 .ConfigureLogging((context, builder) => builder.ConfigureLogging(context))
-#if DEBUG
-                .ConfigureServices((context, services) =>
-                {
-                    services.ConfigureServices(context);
-                    var worker = Environment.GetEnvironmentVariable("DEBUG_WORKER");
-                    services.AddHostedService(context.Configuration, worker);
-                })
-#else
-                .ConfigureServices((context, services) =>
-                    services.ConfigureServices(context)
-                            .AddHostedServices(context.Configuration))
-                .UseWindowsService(options => options.ServiceName = "ps-winsvc")
-#endif
+                .ConfigureServices((context, services) => services.ConfigureServices(context, new[] { "webcam" }))
                 .UseSerilog();
     }
 }

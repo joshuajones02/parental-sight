@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParentalSight.WindowsService", "src\ParentalSight.WindowsService\ParentalSight.WindowsService.csproj", "{97F8A521-10C9-4B82-A41B-7F449D9247F5}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B38E5A3A-1BE6-40F9-90E0-1748A10647F2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{93782641-E2B8-4C7C-A0E8-E8ACBC8CE6C0}"
@@ -15,11 +13,22 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParentalSight.Keylogger.Sam
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParentalSight.Core", "src\ParentalSight.Core\ParentalSight.Core.csproj", "{B8FC6906-8E46-4778-8F3F-7C2F70B70F98}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParentalSight.Common", "src\ParentalSight.Common\ParentalSight.Common.csproj", "{1E85CEFF-3F61-4054-A8AF-AA1FDA053B0C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParentalSight.Common", "src\ParentalSight.Common\ParentalSight.Common.csproj", "{1E85CEFF-3F61-4054-A8AF-AA1FDA053B0C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParentalSight.Screenshot.Sample", "samples\ParentalSight.Screenshot.Sample\ParentalSight.Screenshot.Sample.csproj", "{574A6E65-B734-460B-9EB1-A7363987A341}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParentalSight.Screenshot.Sample", "samples\ParentalSight.Screenshot.Sample\ParentalSight.Screenshot.Sample.csproj", "{574A6E65-B734-460B-9EB1-A7363987A341}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParentalSight.Keylogger", "src\ParentalSight.Keylogger\ParentalSight.Keylogger.csproj", "{F207217F-51F9-4205-BAA1-E1C4B6E52807}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "items", "items", "{B09D543D-51DC-492D-87F2-B11C1227BB41}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{0DBDB474-93B1-4226-9FA5-ED7F6A0896F3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParentalSight.Console", "src\ParentalSight.Console\ParentalSight.Console.csproj", "{306D32DE-51F6-40AD-B7EC-2C6ED23C6999}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,10 +36,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{97F8A521-10C9-4B82-A41B-7F449D9247F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{97F8A521-10C9-4B82-A41B-7F449D9247F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{97F8A521-10C9-4B82-A41B-7F449D9247F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{97F8A521-10C9-4B82-A41B-7F449D9247F5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7094F3FC-E29A-49B6-BE66-C6B0BA2B63F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7094F3FC-E29A-49B6-BE66-C6B0BA2B63F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7094F3FC-E29A-49B6-BE66-C6B0BA2B63F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -55,18 +60,22 @@ Global
 		{F207217F-51F9-4205-BAA1-E1C4B6E52807}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F207217F-51F9-4205-BAA1-E1C4B6E52807}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F207217F-51F9-4205-BAA1-E1C4B6E52807}.Release|Any CPU.Build.0 = Release|Any CPU
+		{306D32DE-51F6-40AD-B7EC-2C6ED23C6999}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{306D32DE-51F6-40AD-B7EC-2C6ED23C6999}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{306D32DE-51F6-40AD-B7EC-2C6ED23C6999}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{306D32DE-51F6-40AD-B7EC-2C6ED23C6999}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{97F8A521-10C9-4B82-A41B-7F449D9247F5} = {B38E5A3A-1BE6-40F9-90E0-1748A10647F2}
 		{7094F3FC-E29A-49B6-BE66-C6B0BA2B63F5} = {93782641-E2B8-4C7C-A0E8-E8ACBC8CE6C0}
 		{9315B27F-E2F3-44DB-B915-46C3D1C92D8D} = {93782641-E2B8-4C7C-A0E8-E8ACBC8CE6C0}
 		{B8FC6906-8E46-4778-8F3F-7C2F70B70F98} = {B38E5A3A-1BE6-40F9-90E0-1748A10647F2}
 		{1E85CEFF-3F61-4054-A8AF-AA1FDA053B0C} = {B38E5A3A-1BE6-40F9-90E0-1748A10647F2}
 		{574A6E65-B734-460B-9EB1-A7363987A341} = {93782641-E2B8-4C7C-A0E8-E8ACBC8CE6C0}
 		{F207217F-51F9-4205-BAA1-E1C4B6E52807} = {B38E5A3A-1BE6-40F9-90E0-1748A10647F2}
+		{306D32DE-51F6-40AD-B7EC-2C6ED23C6999} = {B38E5A3A-1BE6-40F9-90E0-1748A10647F2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A04A2F16-5ED1-45E1-BF8C-1BB65CDABADF}
